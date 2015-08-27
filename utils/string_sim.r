@@ -1,7 +1,7 @@
 str1ng_sim <- function(str1, str2) {
 
-  str1 <- as.character(str1[[1]])
-  str2 <- as.character(str2[[1]])
+  str1 <- tolower(as.character(str1[[1]]))
+  str2 <- tolower(as.character(str2[[1]]))
 
   len_str1 <- length(str1)
   len_str2 <- length(str2)

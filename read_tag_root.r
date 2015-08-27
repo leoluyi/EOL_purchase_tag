@@ -1,7 +1,10 @@
 read_tag_root <- function (file, encoding="UTF-8") {
 
-  tag_root <- strsplit(readLines(file, encoding = encoding),
+  file_con <- file(file, encoding = encoding)
+  tag_root <- strsplit(readLines(file_con, encoding = "UTF-8"),
                        split = ",")
+
+  close(file_con)
 
   tag_names <- sapply(tag_root, function(x) x[[1]])
 

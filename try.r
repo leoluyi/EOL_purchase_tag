@@ -13,7 +13,7 @@ item_names <- readLines("data/item_names.txt", encoding = "UTF-8")
 length(item_names) # 977952 records
 length(unique(item_names)) # 62555 items
 
-tag_root <- read_tag_root("data/tag_root.txt")
+tag_root <- read_tag_root(file="data/tag_root.csv", encoding = "Big5")
 
 # clear and unique --------------------------------------------------------
 
