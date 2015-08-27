@@ -1,5 +1,3 @@
-source("utils/string_sim.r", encoding = "UTF-8", local = TRUE)
-
 is_tag <- function (item, keys, threshold) {
 
   sims <- sapply(keys,

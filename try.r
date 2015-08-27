@@ -5,6 +5,7 @@ source("utils/remove_unit.r", encoding = "UTF-8")
 source("read_tag_root.r", encoding = "UTF-8")
 source("utils/to_halfwidth.r", encoding = "UTF-8")
 source("utils/tagging.r", encoding = "UTF-8")
+source("utils/string_sim.r", encoding = "UTF-8")
 
 # load file ---------------------------------------------------------------
 
@@ -22,15 +23,16 @@ item_names <- item_names[!grepl("扣抵", item_names)]
 item_unique_wo_unit <- unique(remove_unit(to_halfwidth(item_names)))
 # writeLines(item_unique_wo_unit, "item_unique.txt")  # output for n-gram
 
-# tagging -----------------------------------------------------------------
+# tagging test -----------------------------------------------------------
 
-# tag_item("海水魚a", tag_root, 0.2)
+# tag_item("海水魚a", tag_root, 0.8)
+# tag_item("豐力富全家人營養調製奶粉2.4k", tag_root, 0.8)
 sample_data <- sample(item_unique_wo_unit, 500)
 temp <- lapply(sample_data,
-               function(x) output <- tag_item(x, tag_root, threshold=0.3))
+               function(x) {output <- tag_item(x, tag_root, threshold=0.8)})
 names(temp) <- sample_data
 table(sapply(temp, length)) # freq
 
-temp[sapply(temp, function(x) length(x)==1)]
+temp[sapply(temp, function(x) length(x)>=30)]
 
 
