@@ -26,10 +26,10 @@ string_sim <- function(stri1, stri2) {
   if (lcs$LLCS != 0) {
     m <- max(len_str1, len_str2)
     n <- min(len_str1, len_str2)
-    QSI_by_root <- lcs$LLCS / (m*0.8 + n*0.2)
+    QSI_by_root <- lcs$LLCS / (m*0.1 + n*0.9)
   } else
     QSI_by_root <- 0
-  # cat(str2, "-", lcs$LCS, ": ", QSI_by_root, "\n")
+  # cat(stri2, "-", lcs$LCS, ": ", QSI_by_root, "\n")
   QSI_by_root
 
   # lcs$QSI
