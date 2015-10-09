@@ -2,29 +2,11 @@
 
 library(dplyr)
 library(ggplot2)
-source("utils/remove_unit.r", encoding = "UTF-8")
-source("utils/read_tag_root.r", encoding = "UTF-8")
-source("utils/to_halfwidth.r", encoding = "UTF-8")
+
+source("read_data.r", encoding = "UTF-8")
 source("utils/tagging.r", encoding = "UTF-8")
 source("utils/string_sim.r", encoding = "UTF-8")
 
-# load file ---------------------------------------------------------------
-
-item_names <- readLines("data/item_names.txt", encoding = "UTF-8")
-
-length(item_names) # 977952 records
-length(unique(item_names)) # 62555 items
-
-tag_root_list <- read_tag_root(file="data/tag_root.tsv", encoding = "UTF-8")
-
-key_dominant <- readLines("data/key_dominant.txt", encoding = "UTF-8")
-
-# clear and unique --------------------------------------------------------
-
-## remove coupon item
-item_names <- item_names[!grepl("扣抵", item_names)]
-item_unique_wo_unit <- unique(remove_unit(to_halfwidth(item_names)))
-# writeLines(item_unique_wo_unit, "result/item_unique.txt")  # output for n-gram
 
 # tagging test -----------------------------------------------------------
 
@@ -96,13 +78,8 @@ ggplot(result, aes(x=tag_count, y=..density..,fill=thre, colour=thre, group =thr
   geom_histogram(alpha=0.1, position="identity", binwidth=1) +
   scale_x_discrete(breaks=0:40)
 
-names(temp) <- item_unique_wo_unit
-# capture.output(
-#   names(temp)[sapply(temp, function(x) length(x)==0)], file = "./result/empty_item.txt")
-
 
 # write empty -----------------------------------------------------------------
 
-load("temp.RDS")
 item_empty_tag <- names(temp)[sapply(temp, function(x) length(x)==0)]
 writeLines(item_empty_tag, "result/empty_item.txt")
