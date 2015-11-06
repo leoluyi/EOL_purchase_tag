@@ -1,10 +1,3 @@
-## === install required packages ===
-list.of.packages <- c("qualV")
-new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-if(length(new.packages)) install.packages(new.packages)
-rm(new.packages, list.of.packages)
-
-
 string_sim <- function(stri1, stri2) {
 
   stri1 <- tolower(as.character(stri1[[1]]))
