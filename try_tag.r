@@ -3,9 +3,13 @@
 library(dplyr)
 library(ggplot2)
 
-source("read_data.r", encoding = "UTF-8")
 source("utils/tagging.r", encoding = "UTF-8")
 source("utils/string_sim.r", encoding = "UTF-8")
+
+
+# read data ---------------------------------------------------------------
+
+source("read_data.r", encoding = "UTF-8")
 
 
 # tagging test -----------------------------------------------------------
@@ -31,6 +35,16 @@ temp[sapply(temp, function(x) length(x)==0)]
 
 # tagging all --------------------------------------------------------------
 
+# items_with_tag_all <- lapply(items_with_tag_all, function(x) gsub("^\ufeff", "", x)) # remove \ufeff
+# save(items_with_tag_all, file = "result/items_with_tag_all.RData")
+
+# items_with_tag_all <- item_unique_wo_unit %>%
+#   add_tags(tag_root_list=tag_root_list,
+#                     dominant_keys=key_dominant,
+#                     threshold=0.43)
+# save(items_with_tag_all, file = "result/items_with_tag_all.RData")
+
+## parallel computing == #
 library (snowfall)
 ptm <- proc.time()
 sfInit (parallel=TRUE , cpus=4, type = "MPI")
@@ -42,13 +56,10 @@ items_with_tag_all <- item_unique_wo_unit %>%
                     threshold=0.43)
 sfStop()
 proc.time() - ptm
-# save(items_with_tag_all, file = "result/items_with_tag_all.RData")
+# =================== #
 
-# items_with_tag_all <- item_unique_wo_unit %>%
-#   add_tags(tag_root_list=tag_root_list,
-#                     dominant_keys=key_dominant,
-#                     threshold=0.43)
-# save(items_with_tag_all, file = "result/items_with_tag_all.RData")
+names(items_with_tag_all) <- item_unique
+
 
 ## inspect
 table(sapply(items_with_tag_all, length)) # tag_count
