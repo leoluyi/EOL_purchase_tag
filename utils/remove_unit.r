@@ -1,6 +1,6 @@
 remove_unit <- function(x) {
   x <- gsub("^\\s+|\\s+$", "", x) # trim
-  x <- gsub("[(]?[0-9]*(\\.[0-9 ])*\\s*(l|L|ml|ML|g|G|cc|公斤|公克|公升|入|包|個)[\\s)]?(\\s*/\\s*[罐瓶組包粒盒])?$", "",
+  x <- gsub("[(]?[0-9]+(\\.[0-9 ])*\\s*(l|L|ml|ML|g|G|cc|公斤|公克|公升|入|包|個)[\\s)]?(\\s*/\\s*[罐瓶組包粒盒])?$", "",
             x, ignore.case = TRUE) # 123 ml
   x <- gsub("[(][大中小粗細][)]$", "", x)
   x <- gsub("[0-9]+\\s*(l|L|ml|ML|g|G|cc|公斤|公克|公升|入|包|個).*", "", x)
@@ -14,3 +14,4 @@ remove_unit <- function(x) {
 # remove_unit(to_halfwidth("百齡罈8年調和式麥芽蘇格蘭威士忌"))
 # remove_unit("Biore 淨嫩沐浴乳抗菌光澤型 1000ml")
 # remove_unit("BLUE GIRL藍妹啤酒 330ml/罐")
+# remove_unit("奶油餐包")
