@@ -21,4 +21,5 @@ all_tags <- items_with_tag_all %>% unlist(., use.names = FALSE) %>% unique()
 ## reserve space
 m <- matrix(nrow = length(items_with_tag_all), ncol = length(all_tags))
 
-unique(remove_unit(to_halfwidth(data_pxmart$item_name)))[!(unique(remove_unit(to_halfwidth(data_pxmart$item_name))) %in% unique(item_names))]
+
+
