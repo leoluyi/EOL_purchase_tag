@@ -42,9 +42,9 @@ temp[sapply(temp, function(x) length(x)==0)]
 #   add_tags(tag_root_list=tag_root_list,
 #                     dominant_keys=key_dominant,
 #                     threshold=0.43)
-# save(items_with_tag_all, file = "result/items_with_tag_all.RData")
 
-## parallel computing == #
+
+## == parallel computing == #
 library (snowfall)
 ptm <- proc.time()
 sfInit (parallel=TRUE , cpus=4, type = "MPI")
@@ -58,14 +58,18 @@ sfStop()
 proc.time() - ptm
 # =================== #
 
-names(items_with_tag_all) <- item_unique
-
+head(items_with_tag_all)
 
 ## inspect
 table(sapply(items_with_tag_all, length)) # tag_count
 
 ## check zero-tag items
-# temp[sapply(items_with_tag_all, function(x) length(x)==0)]
+# names(items_with_tag_all)[sapply(items_with_tag_all, function(x) length(x)==0)]
+
+
+# save result -------------------------------------------------------------
+
+# save(items_with_tag_all, file = "result/items_with_tag_all.RData")
 
 
 # plot --------------------------------------------------------------------

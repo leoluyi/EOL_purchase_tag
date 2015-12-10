@@ -13,13 +13,13 @@ length(item_names) # 977952 records
 length(unique(item_names)) # 62555 unique items
 
 tag_root_list <- read_tag_root(file="data/tag_root.tsv", encoding = "UTF-8")
+# plyr::ldply(tag_root_list, data.frame, .id="tag")
 
 key_dominant <- readLines("data/key_dominant.txt", encoding = "UTF-8")
 
 # clear and unique --------------------------------------------------------
 
-## remove coupon item
-item_names <- item_names[!grepl("扣抵", item_names)]
+# item_names <- item_names[!grepl("扣抵", item_names)] # remove coupon item
 item_unique <- unique(item_names)
-item_unique_wo_unit <- remove_unit(to_halfwidth(item_unique))
+item_unique_wo_unit <- unique(remove_unit(item_unique))
 # writeLines(item_unique_wo_unit, "result/item_unique.txt")  # output for n-gram

@@ -22,4 +22,3 @@ all_tags <- items_with_tag_all %>% unlist(., use.names = FALSE) %>% unique()
 m <- matrix(nrow = length(items_with_tag_all), ncol = length(all_tags))
 
 
-
